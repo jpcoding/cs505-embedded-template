@@ -25,7 +25,8 @@ Once built you will see something like this:
   Web Server Started..
 ```
 
-Curl can be used to check that your API and database is responding, note the use of a required security header:
+Curl can be used to check that your API and database is responding:
+*Note the use of a required security header
 ```
 curl -H "X-Auth-API-Key: 12463865" http://localhost:9000/api/checkmydatabase
 {"status_desc":"accesslog table exists","success":"true"}
