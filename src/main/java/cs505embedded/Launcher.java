@@ -14,12 +14,12 @@ import java.net.URI;
 public class Launcher {
 
     //sudo docker build -t cs505-embedded .
-    //sudo docker run -d --rm -p 8081:8081 cs505-embedded
+    //sudo docker run -d --rm -p 9000:9000 cs505-embedded
 
 
     public static DBEngine dbEngine;
     public static final String API_SERVICE_KEY = "12463865"; //Change this to your student id
-    public static final int WEB_PORT = 8081;
+    public static final int WEB_PORT = 9000;
 
     public static void main(String[] args) throws IOException {
 
