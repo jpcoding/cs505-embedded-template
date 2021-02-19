@@ -31,5 +31,21 @@ Curl can be used to check that your API and database is responding:
 curl -H "X-Auth-API-Key: 12463865" http://localhost:9000/api/checkmydatabase
 {"status_desc":"accesslog table exists","success":"true"}
 ```
-
 ---
+
+## Creating a container to run your package
+
+A Dockerfile is included in this repo that references the jar you built in the first step.  Run the docker build command to build your container:
+```
+  sudo docker build -t cs505-embedded .
+```
+
+Once a container is built it can be run in the foreground:
+```
+  sudo docker run -it --rm -p 9000:9000 cs505-embedded
+```    
+or background:
+```
+  sudo docker run -d --rm -p 9000:9000 cs505-embedded
+```    
+    
