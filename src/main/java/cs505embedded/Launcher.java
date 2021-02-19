@@ -16,6 +16,9 @@ public class Launcher {
     //sudo docker build -t cs505-embedded .
     //sudo docker run -d --rm -p 9000:9000 cs505-embedded
 
+    //test
+    //curl -H "X-Auth-API-Key: 12463865" http://localhost:9000/api/checkmydatabase
+
 
     public static DBEngine dbEngine;
     public static final String API_SERVICE_KEY = "12463865"; //Change this to your student id
