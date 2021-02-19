@@ -3,7 +3,7 @@
 ## Building and running package
 The class VM has Java but not Maven, which is used for building the package.  
 
-To install Maven run  
+To install Maven run:  
 ```
 sudo apt install maven -y
 ```
@@ -23,6 +23,12 @@ Once built you will see something like this:
   Feb 19, 2021 8:46:11 AM org.glassfish.grizzly.http.server.HttpServer start
   INFO: [HttpServer] Started.
   Web Server Started..
+```
+
+Curl can be used to check that your API and database is responding, note the use of a required security header:
+```
+curl -H "X-Auth-API-Key: 12463865" http://localhost:9000/api/checkmydatabase
+{"status_desc":"accesslog table exists","success":"true"}
 ```
 
 ---
