@@ -3,11 +3,9 @@
 ## Building and running package
 The class VM has Java but not Maven, which is used for building the package.  
 
-To install Maven run 
+To install Maven run  
 ```
-  mvn clean package
-  cd target
-  java -jar cs505-embedded-template-1.0-SNAPSHOT.jar
+sudo apt install maven -y
 ```
 
 Then run ./run.sh to build and start the package.
@@ -27,3 +25,4 @@ Once built you will see something like this:
   Web Server Started..
 ```
 
+---
