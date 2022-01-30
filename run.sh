@@ -1,3 +1,3 @@
 mvn clean package
 cd target
-java -jar cs505-embedded-template-1.0-SNAPSHOT.jar
+java -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -jar cs505-embedded-template-1.0-SNAPSHOT.jar
