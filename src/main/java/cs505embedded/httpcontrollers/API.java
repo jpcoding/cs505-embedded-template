@@ -34,7 +34,7 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response checkMyEndpoint() {
         String responseString = "{}";
-        System.out.println("0");
+
         try {
 
             //get remote ip address from request
