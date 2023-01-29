@@ -185,11 +185,13 @@ public class DBEngine {
     */
     public boolean databaseExist(String databaseName)  {
         boolean exist = false;
+        Connection conn;
         try {
-
-            if(!ds.getConnection().isClosed()) {
+            conn = ds.getConnection();
+            if(!conn.isClosed()) {
                 exist = true;
             }
+            conn.close();
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -200,16 +202,20 @@ public class DBEngine {
     public boolean tableExist(String tableName)  {
         boolean exist = false;
 
-        ResultSet result;
+        Connection conn = null;
         DatabaseMetaData metadata = null;
+        ResultSet result = null;
 
         try {
-            metadata = ds.getConnection().getMetaData();
+            conn = ds.getConnection();
+            metadata = conn.getMetaData();
             result = metadata.getTables(null, null, tableName.toUpperCase(), null);
-
             if(result.next()) {
                 exist = true;
             }
+            result.close();
+            conn.close();
+
         } catch(java.sql.SQLException e) {
             e.printStackTrace();
         }
@@ -232,6 +238,7 @@ public class DBEngine {
 
             //fill in the query
             queryString = "SELECT * FROM accesslog";
+
 
             try(Connection conn = ds.getConnection()) {
                 try (Statement stmt = conn.createStatement()) {
