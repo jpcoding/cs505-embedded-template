@@ -34,6 +34,7 @@ public class API {
     @Produces(MediaType.APPLICATION_JSON)
     public Response checkMyEndpoint() {
         String responseString = "{}";
+
         try {
 
             //get remote ip address from request
@@ -44,7 +45,6 @@ public class API {
 
             Map<String,String> responseMap = new HashMap<>();
             if(Launcher.dbEngine.databaseExist("mydatabase")) {
-
                 if(Launcher.dbEngine.tableExist("accesslog")) {
                     responseMap.put("success", Boolean.TRUE.toString());
                     responseMap.put("status_desc","accesslog table exists");
@@ -52,12 +52,10 @@ public class API {
                     responseMap.put("success", Boolean.FALSE.toString());
                     responseMap.put("status_desc","access_log table does not exist!");
                 }
-
             } else {
                 responseMap.put("success", Boolean.FALSE.toString());
                 responseMap.put("status_desc","database does not exist!");
             }
-
             responseString = gson.toJson(responseMap);
 
 
@@ -70,6 +68,7 @@ public class API {
 
             return Response.status(500).entity(exceptionAsString).build();
         }
+
         return Response.ok(responseString).header("Access-Control-Allow-Origin", "*").build();
     }
 
