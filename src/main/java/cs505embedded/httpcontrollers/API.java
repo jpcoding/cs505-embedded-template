@@ -18,7 +18,7 @@ public class API {
     private javax.inject.Provider<org.glassfish.grizzly.http.server.Request> request;
 
     private Gson gson;
-    private access_count=0;
+    private long access_count=0;
 
     public API() {
         gson = new Gson();
