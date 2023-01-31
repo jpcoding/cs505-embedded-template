@@ -18,6 +18,7 @@ public class API {
     private javax.inject.Provider<org.glassfish.grizzly.http.server.Request> request;
 
     private Gson gson;
+    private access_count=0;
 
     public API() {
         gson = new Gson();
@@ -84,9 +85,12 @@ public class API {
             //get the timestamp of the request
             long access_ts = System.currentTimeMillis();
             System.out.println("IP: " + remoteIP + " Timestamp: " + access_ts);
+            // Increase the access count by 1 
+            access_count = access_count +1;
 
             //insert access data
-            String insertQuery = "INSERT INTO accesslog VALUES ('" + remoteIP + "'," + access_ts + ")";
+            // String insertQuery = "INSERT INTO accesslog VALUES ('" + remoteIP + "'," + access_ts + ")";
+            String insertQuery = "INSERT INTO accesslog VALUES ('" + remoteIP + "'," + access_count + ")";
             Launcher.dbEngine.executeUpdate(insertQuery);
 
             //get accesslog data
