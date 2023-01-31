@@ -43,6 +43,7 @@ public class API {
             //get the timestamp of the request
             long access_ts = System.currentTimeMillis();
             System.out.println("IP: " + remoteIP + " Timestamp: " + access_ts);
+            System.out.println("IP: " + remoteIP + " access_count: " + access_count);
 
             Map<String,String> responseMap = new HashMap<>();
             if(Launcher.dbEngine.databaseExist("mydatabase")) {
