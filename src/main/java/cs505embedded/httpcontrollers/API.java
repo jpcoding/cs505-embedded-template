@@ -43,7 +43,6 @@ public class API {
             //get the timestamp of the request
             long access_ts = System.currentTimeMillis();
             System.out.println("IP: " + remoteIP + " Timestamp: " + access_ts);
-            System.out.println("IP: " + remoteIP + " access_count: " + access_count);
 
             Map<String,String> responseMap = new HashMap<>();
             if(Launcher.dbEngine.databaseExist("mydatabase")) {
@@ -85,20 +84,27 @@ public class API {
             String remoteIP = request.get().getRemoteAddr();
             //get the timestamp of the request
             long access_ts = System.currentTimeMillis();
-            System.out.println("IP: " + remoteIP + " Timestamp: " + access_ts);
-            // Increase the access count by 1 
-            access_count = access_count +1;
+            // System.out.println("IP: " + remoteIP + " Timestamp: " + access_ts);
 
             //insert access data
-            // String insertQuery = "INSERT INTO accesslog VALUES ('" + remoteIP + "'," + access_ts + ")";
-            String insertQuery = "INSERT INTO accesslog VALUES ('" + remoteIP + "'," + access_count + ")";
+            String insertQuery = "INSERT INTO accesslog VALUES ('" + remoteIP + "'," + access_ts + ")";
             Launcher.dbEngine.executeUpdate(insertQuery);
 
+            // Get the current ip access account and print
+
             //get accesslog data
-            List<Map<String,String>> accessMapList = Launcher.dbEngine.getAccessLogs();
+            List<Map<String,String>> accessMapList = Launcher.dbEngine.getAccessCountLogs();
+            int current_ip_count = 0;
+            for (Map<String, String> map : accessMapList) {
+                if (map.containsKey(remoteIP)) {
+                   current_ip_count = Integer.parseInt(map.get(remoteIP));
+                   break;
+                }
+            }
+            System.out.println("remote_ip: "+remoteIP +", access_count: "+current_ip_count);
             responseString = gson.toJson(accessMapList);
-
-
+            responseString = responseString.replace("\"", "");
+            // System.out.println(responseString);
         } catch (Exception ex) {
 
             StringWriter sw = new StringWriter();

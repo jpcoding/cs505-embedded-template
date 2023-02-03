@@ -263,4 +263,52 @@ public class DBEngine {
         return accessMapList;
     }
 
+    public List<Map<String,String>> getAccessCountLogs() {
+    List<Map<String,String>> accessMapList = null;
+    try {
+
+        accessMapList = new ArrayList<>();
+
+        Type type = new TypeToken<Map<String, String>>(){}.getType();
+
+        String queryString = null;
+
+        //fill in the query
+
+        queryString = "SELECT remote_ip, COUNT(*) as access_count FROM accesslog GROUP BY remote_ip";
+
+
+        try(Connection conn = ds.getConnection()) {
+            try (Statement stmt = conn.createStatement()) {
+
+                try(ResultSet rs = stmt.executeQuery(queryString)) {
+
+                    while (rs.next()) {
+                        // System.out.println(rs);
+                        // ResultSetMetaData rsmd = rs.getMetaData();
+                        // int columnCount = rsmd.getColumnCount();
+                        // // The column count starts from 1
+                        // for (int i = 1; i <= columnCount; i++ ) {
+                        // System.out.println( rsmd.getColumnName(i));
+                        // // Do stuff with name
+                        // }
+                        Map<String,String> accessMap = new HashMap<>();
+                        accessMap.put(rs.getString("remote_ip"), rs.getString("access_count"));
+                        // System.out.println(accessMap);
+
+                        // accessMap.put("access_ts", rs.getString("access_ts"));
+                        accessMapList.add(accessMap);
+                    }
+
+                }
+            }
+        }
+
+    } catch(Exception ex) {
+        ex.printStackTrace();
+    }
+
+    return accessMapList;
+    }
+
 }
