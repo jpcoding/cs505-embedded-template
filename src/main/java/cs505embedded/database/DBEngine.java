@@ -293,9 +293,10 @@ public class DBEngine {
                         // // Do stuff with name
                         // }
                         Map<String,String> accessMap = new HashMap<>();
-                        accessMap.put(rs.getString("remote_ip"), rs.getString("access_count"));
+                        accessMap.put("remote_ip", rs.getString("remote_ip"));
+                        accessMap.put("access_count", rs.getString("access_count"));
+                        // accessMap.put(rs.getString("remote_ip"), rs.getString("access_count"));
                         // System.out.println(accessMap);
-
                         // accessMap.put("access_ts", rs.getString("access_ts"));
                         accessMapList.add(accessMap);
                     }

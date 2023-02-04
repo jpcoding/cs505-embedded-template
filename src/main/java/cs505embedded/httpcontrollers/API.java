@@ -95,15 +95,18 @@ public class API {
             //get accesslog data
             List<Map<String,String>> accessMapList = Launcher.dbEngine.getAccessCountLogs();
             int current_ip_count = 0;
+            // System.out.println(accessMapList);
             for (Map<String, String> map : accessMapList) {
-                if (map.containsKey(remoteIP)) {
-                   current_ip_count = Integer.parseInt(map.get(remoteIP));
+                // System.out.println(map);
+                if (map.get("remote_ip").equals(remoteIP)) {
+                //    System.out.println(map);
+                   current_ip_count = Integer.parseInt(map.get("access_count"));
                    break;
                 }
             }
             System.out.println("remote_ip: "+remoteIP +", access_count: "+current_ip_count);
             responseString = gson.toJson(accessMapList);
-            responseString = responseString.replace("\"", "");
+            // responseString = responseString.replace("\"", "");
             // System.out.println(responseString);
         } catch (Exception ex) {
 
